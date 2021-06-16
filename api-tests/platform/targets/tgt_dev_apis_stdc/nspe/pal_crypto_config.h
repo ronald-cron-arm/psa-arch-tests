@@ -104,7 +104,7 @@
  *
  * Enable the ARC4 key type.
  */
-#define ARCH_TEST_ARC4
+//#define ARCH_TEST_ARC4
 
 /**
  * \def ARCH_TEST_CIPHER_MODE_CTR
@@ -271,7 +271,7 @@
  *
  * Requires: ARCH_TEST_AES
  */
-#define ARCH_TEST_CCM
+//#define ARCH_TEST_CCM
 
 /**
  * \def ARCH_TEST_GCM
