@@ -90,17 +90,17 @@ int32_t psa_key_derivation_input_key_test(caller_security_t caller __UNUSED)
                  check1[i].step, key);
         TEST_ASSERT_EQUAL(status, check1[i].expected_status, TEST_CHECKPOINT_NUM(6));
 
+        status = val->crypto_function(VAL_CRYPTO_DESTROY_KEY, key);
+        TEST_ASSERT_EQUAL(status, PSA_SUCCESS, TEST_CHECKPOINT_NUM(7));
+
         if (check1[i].expected_status != PSA_SUCCESS)
         {
             /* Abort the key derivation operation */
             status = val->crypto_function(VAL_CRYPTO_KEY_DERIVATION_ABORT, &operation);
-            TEST_ASSERT_EQUAL(status, PSA_SUCCESS, TEST_CHECKPOINT_NUM(7));
+            TEST_ASSERT_EQUAL(status, PSA_SUCCESS, TEST_CHECKPOINT_NUM(8));
 
             continue;
         }
-
-        status = val->crypto_function(VAL_CRYPTO_DESTROY_KEY, key);
-        TEST_ASSERT_EQUAL(status, PSA_SUCCESS, TEST_CHECKPOINT_NUM(8));
 
         /* Provide an input for key derivation or key agreement */
         status = val->crypto_function(VAL_CRYPTO_KEY_DERIVATION_INPUT_KEY, &operation,

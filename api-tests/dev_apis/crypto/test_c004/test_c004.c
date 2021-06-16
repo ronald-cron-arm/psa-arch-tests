@@ -80,7 +80,10 @@ int32_t test_psa_export_public_key(caller_security_t caller __UNUSED)
 
         /* If failure is expected, continue with the next data set */
         if (check1[i].expected_status != PSA_SUCCESS)
+        {
+            val->crypto_function(VAL_CRYPTO_DESTROY_KEY, key);
             continue;
+        }
 
         TEST_ASSERT_EQUAL(expected_data_length, check1[i].expected_data_length,
                           TEST_CHECKPOINT_NUM(5));
