@@ -78,7 +78,10 @@ int32_t psa_export_key_test(caller_security_t caller __UNUSED)
 
         /* If failure is expected, continue with the next data set */
         if (check1[i].expected_status != PSA_SUCCESS)
+        {
+            val->crypto_function(VAL_CRYPTO_DESTROY_KEY, key);
             continue;
+        }
 
         /* Check the attributes of the exported key */
         TEST_ASSERT_EQUAL(expected_data_length, check1[i].expected_data_length,

@@ -88,12 +88,12 @@ int32_t psa_key_derivation_key_agreement_test(caller_security_t caller __UNUSED)
         /* Reset the key attributes and check if psa_import_key fails */
         val->crypto_function(VAL_CRYPTO_RESET_KEY_ATTRIBUTES, &attributes);
 
-        if (check1[i].expected_status != PSA_SUCCESS)
-            continue;
-
         /* Destroy a key and restore the slot to its default state */
         status = val->crypto_function(VAL_CRYPTO_DESTROY_KEY, key);
         TEST_ASSERT_EQUAL(status, PSA_SUCCESS, TEST_CHECKPOINT_NUM(7));
+
+        if (check1[i].expected_status != PSA_SUCCESS)
+            continue;
 
         if (valid_test_input_index < 0)
             valid_test_input_index = i;
