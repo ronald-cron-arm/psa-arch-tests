@@ -131,7 +131,7 @@ int32_t pal_crypto_function(int type, va_list valist)
 			aead_operation           = va_arg(valist, psa_aead_operation_t *);
 			key                      = va_arg(valist, psa_key_id_t);
 			alg                      = va_arg(valist, psa_algorithm_t);
-			return psa_aead_decrypt_setup(aead_operation,
+			return psa_aead_encrypt_setup(aead_operation,
 										  key,
 										  alg);
 			break;
