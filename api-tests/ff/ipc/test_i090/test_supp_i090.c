@@ -33,10 +33,11 @@ const server_test_t test_i090_server_tests_list[] = {
 
 int32_t server_test_psa_call_with_neg_type()
 {
-    int32_t         status = VAL_STATUS_SUCCESS;
     psa_msg_t       msg = {0};
     psa_signal_t    signals;
 
+#if STATELESS_ROT != 1
+    int32_t         status = VAL_STATUS_SUCCESS;
     status = val->process_connect_request(SERVER_UNSPECIFED_VERSION_SIGNAL, &msg);
     if (val->err_check_set(TEST_CHECKPOINT_NUM(201), status))
     {
@@ -45,6 +46,7 @@ int32_t server_test_psa_call_with_neg_type()
     }
 
     psa->reply(msg.handle, PSA_SUCCESS);
+#endif
 
 wait:
     signals = psa->wait(PSA_WAIT_ANY, PSA_BLOCK);
@@ -54,7 +56,14 @@ wait:
         {
             goto wait;
         }
-
+#if STATELESS_ROT == 1
+        if (msg.type != PSA_IPC_DISCONNECT)
+        {
+        	/* Control shouldn't have come here */
+        	val->print(PRINT_ERROR, "\tControl shouldn't have reached here\n", 0);
+        	psa->reply(msg.handle, -2);
+        }
+#else
         if (msg.type == PSA_IPC_DISCONNECT)
         {
             psa->reply(msg.handle, PSA_SUCCESS);
@@ -68,6 +77,8 @@ wait:
             val->process_disconnect_request(SERVER_UNSPECIFED_VERSION_SIGNAL, &msg);
             psa->reply(msg.handle, PSA_SUCCESS);
         }
+#endif
+
     }
     else
     {

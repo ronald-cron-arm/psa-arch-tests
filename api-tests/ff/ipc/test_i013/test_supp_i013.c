@@ -1,5 +1,5 @@
 /** @file
- * Copyright (c) 2018-2020, Arm Limited or its affiliates. All rights reserved.
+ * Copyright (c) 2018-2021, Arm Limited or its affiliates. All rights reserved.
  * SPDX-License-Identifier : Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,7 +66,10 @@ int32_t server_test_psa_get_with_more_than_one_signal(void)
             /* Unblock client */
             if (psa->get(SERVER_UNSPECIFED_VERSION_SIGNAL, &msg) != PSA_SUCCESS)
             {
+#if STATELESS_ROT != 1
+
                 val->process_connect_request(SERVER_UNSPECIFED_VERSION_SIGNAL, &msg);
+#endif
             }
             psa->reply(msg.handle, PSA_ERROR_CONNECTION_REFUSED);
             return VAL_STATUS_ERROR;

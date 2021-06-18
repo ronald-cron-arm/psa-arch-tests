@@ -1,5 +1,5 @@
 /** @file
- * Copyright (c) 2018-2020, Arm Limited or its affiliates. All rights reserved.
+ * Copyright (c) 2018-2021, Arm Limited or its affiliates. All rights reserved.
  * SPDX-License-Identifier : Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,15 +33,24 @@ const client_test_t test_i015_client_tests_list[] = {
 
 int32_t client_test_psa_get_with_non_rot_signal(caller_security_t caller __UNUSED)
 {
-   psa_handle_t       handle = 0;
+
+	int32_t            status = VAL_STATUS_SUCCESS;
 
    val->print(PRINT_TEST, "[Check 1] Test psa_get with non-RoT signal\n", 0);
-
+#if STATELESS_ROT != 1
+   psa_handle_t       handle = 0;
    handle = psa->connect(SERVER_UNSPECIFED_VERSION_SID, SERVER_UNSPECIFED_VERSION_VERSION);
 
    /* Expectation is server test should hang and control shouldn't have come here */
    val->print(PRINT_ERROR, "\tConnection should failed but succeed\n", 0);
 
    (void)(handle);
-   return VAL_STATUS_SPM_FAILED;
+   status = VAL_STATUS_SPM_FAILED;
+#else
+    psa_status_t            status_of_call;
+
+    status_of_call = psa->call(SERVER_UNSPECIFED_VERSION_HANDLE, PSA_IPC_CALL, NULL, 0, NULL, 0);
+    (void)status_of_call;
+#endif
+   return status;
 }

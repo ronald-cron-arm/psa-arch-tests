@@ -1,5 +1,5 @@
 /** @file
- * Copyright (c) 2019-2020, Arm Limited or its affiliates. All rights reserved.
+ * Copyright (c) 2019-2021, Arm Limited or its affiliates. All rights reserved.
  * SPDX-License-Identifier : Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@
 
 #include "val_client_defs.h"
 #include "val_service_defs.h"
+#include "stdio.h"
 
 #define val CONCAT(val, _server_sp)
 #define psa CONCAT(psa, _server_sp)
@@ -33,10 +34,11 @@ const server_test_t test_i049_server_tests_list[] = {
 
 int32_t server_test_psa_call_with_invalid_outvec_pointer(void)
 {
-    int32_t         status = VAL_STATUS_SUCCESS;
     psa_msg_t       msg = {0};
     psa_signal_t    signals;
 
+#if STATELESS_ROT != 1
+    int32_t         status = VAL_STATUS_SUCCESS;
     status = val->process_connect_request(SERVER_UNSPECIFED_VERSION_SIGNAL, &msg);
     if (val->err_check_set(TEST_CHECKPOINT_NUM(201), status))
     {
@@ -45,6 +47,7 @@ int32_t server_test_psa_call_with_invalid_outvec_pointer(void)
     }
 
     psa->reply(msg.handle, PSA_SUCCESS);
+#endif
 
 wait:
     signals = psa->wait(PSA_WAIT_ANY, PSA_BLOCK);
@@ -60,8 +63,10 @@ wait:
             /* Control shouldn't have come here */
             val->print(PRINT_ERROR, "\tControl shouldn't have reached here\n", 0);
             psa->reply(msg.handle, -2);
+#if STATELESS_ROT != 1
             val->process_disconnect_request(SERVER_UNSPECIFED_VERSION_SIGNAL, &msg);
             psa->reply(msg.handle, PSA_SUCCESS);
+#endif
         }
         else if (msg.type == PSA_IPC_DISCONNECT)
         {
