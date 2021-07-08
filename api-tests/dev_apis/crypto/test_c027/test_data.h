@@ -37,7 +37,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_update - HMAC - SHA256 - 64 Byte\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_SIGN_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_SIGN_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_256),
     .data            = key_data,
     .data_length     = 64,
@@ -54,7 +54,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_update - CMAC - AES - 16 Byte\n",
     .type            = PSA_KEY_TYPE_AES,
-    .usage_flags     = PSA_KEY_USAGE_SIGN_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_SIGN_HASH,
     .alg             = PSA_ALG_CMAC,
     .data            = key_data,
     .data_length     = 16,
@@ -71,7 +71,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_update - HMAC - SHA512 - 32 Byte\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_SIGN_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_SIGN_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_512),
     .data            = key_data,
     .data_length     = 32,
@@ -84,7 +84,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_update - HMAC - SHA512 - Invalid operation state\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_SIGN_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_SIGN_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_512),
     .data            = key_data,
     .data_length     = 32,

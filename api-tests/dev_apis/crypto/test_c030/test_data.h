@@ -39,7 +39,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA224\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_224),
     .data            = key_data,
     .data_length     = 64,
@@ -56,7 +56,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA256\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_256),
     .data            = key_data,
     .data_length     = 64,
@@ -73,7 +73,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA512\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_512),
     .data            = key_data,
     .data_length     = 64,
@@ -90,7 +90,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA224 - Truncated 8 Byte\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_TRUNCATED_MAC(PSA_ALG_HMAC(PSA_ALG_SHA_224), 8),
     .data            = key_data,
     .data_length     = 64,
@@ -105,7 +105,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA224 - Invalid mac length\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_224),
     .data            = key_data,
     .data_length     = 64,
@@ -120,7 +120,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA224 - Invalid expected mac\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_224),
     .data            = key_data,
     .data_length     = 64,
@@ -135,7 +135,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - HMAC - SHA224 - Invalid operation state\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_224),
     .data            = key_data,
     .data_length     = 64,
@@ -154,7 +154,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_finish - CMAC - AES\n",
     .type            = PSA_KEY_TYPE_AES,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_CMAC,
     .data            = key_data,
     .data_length     = AES_16B_KEY_SIZE,

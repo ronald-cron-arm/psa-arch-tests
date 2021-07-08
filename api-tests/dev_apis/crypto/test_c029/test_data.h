@@ -34,7 +34,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - HMAC - SHA256\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_256),
     .data            = key_data,
     .data_length     = 64,
@@ -48,7 +48,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - CMAC - AES\n",
     .type            = PSA_KEY_TYPE_AES,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_CMAC,
     .data            = key_data,
     .data_length     = AES_16B_KEY_SIZE,
@@ -62,7 +62,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Incompatible HMAC for CMAC\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_CMAC,
     .data            = key_data,
     .data_length     = AES_16B_KEY_SIZE,
@@ -76,7 +76,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Invalid usage flag\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_256),
     .data            = key_data,
     .data_length     = 64,
@@ -87,7 +87,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Invalid key type\n",
     .type            = PSA_KEY_TYPE_RAW_DATA,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(PSA_ALG_SHA_256),
     .data            = key_data,
     .data_length     = AES_16B_KEY_SIZE,
@@ -102,7 +102,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Truncated MAC too large\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_TRUNCATED_MAC(PSA_ALG_HMAC(PSA_ALG_SHA_256), 33),
     .data            = key_data,
     .data_length     = 64,
@@ -112,7 +112,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Truncated MAC too small\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_TRUNCATED_MAC(PSA_ALG_HMAC(PSA_ALG_SHA_256), 1),
     .data            = key_data,
     .data_length     = 64,
@@ -124,7 +124,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Unknown MAC algorithm\n",
     .type            = PSA_KEY_TYPE_HMAC,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_HMAC(0),
     .data            = key_data,
     .data_length     = 64,
@@ -137,7 +137,7 @@ static const test_data check1[] = {
 {
     .test_desc       = "Test psa_mac_verify_setup - Bad algorithm (not a MAC algorithm)\n",
     .type            = PSA_KEY_TYPE_AES,
-    .usage_flags     = PSA_KEY_USAGE_VERIFY_MESSAGE,
+    .usage_flags     = PSA_KEY_USAGE_VERIFY_HASH,
     .alg             = PSA_ALG_CBC_NO_PADDING,
     .data            = key_data,
     .data_length     = AES_16B_KEY_SIZE,
