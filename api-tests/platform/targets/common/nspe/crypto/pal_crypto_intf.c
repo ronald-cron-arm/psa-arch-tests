@@ -55,22 +55,26 @@ int32_t pal_crypto_function(int type, va_list valist)
     const psa_key_derivation_operation_t     *c_derivation_operation;
     psa_key_derivation_step_t                 step;
     psa_mac_operation_t                      *mac_operation, mac_operation_temp;
+#ifdef CRYPTO_1_0
     psa_aead_operation_t                     *aead_operation, aead_operation_temp;
+#endif
     const uint8_t                            *nonce;
     size_t                                    nonce_length;
     const uint8_t                            *additional_data;
     size_t                                    additional_data_length;
+#ifdef CRYPTO_1_0
     uint8_t                                  *output1;
     size_t                                   output_size1, *p_output_length1;
-
-
+#endif
 
     switch (type)
 	{
+#ifdef CRYPTO_1_0
 		case PAL_CRYPTO_AEAD_ABORT:
 			aead_operation           = va_arg(valist, psa_aead_operation_t *);
 			return psa_aead_abort(aead_operation);
 			break;
+#endif
 		case PAL_CRYPTO_AEAD_DECRYPT:
 			key                      = va_arg(valist, psa_key_id_t);
 			alg                      = va_arg(valist, psa_algorithm_t);
@@ -95,6 +99,7 @@ int32_t pal_crypto_function(int type, va_list valist)
 									output_size,
 									p_output_length);
 			break;
+#ifdef CRYPTO_1_0
 		case PAL_CRYPTO_AEAD_DECRYPT_SETUP:
 			aead_operation           = va_arg(valist, psa_aead_operation_t *);
 			key                      = va_arg(valist, psa_key_id_t);
@@ -103,6 +108,7 @@ int32_t pal_crypto_function(int type, va_list valist)
 										  key,
 										  alg);
 			break;
+#endif
 		case PAL_CRYPTO_AEAD_ENCRYPT:
 			key                      = va_arg(valist, psa_key_id_t);
 			alg                      = va_arg(valist, psa_algorithm_t);
@@ -127,6 +133,7 @@ int32_t pal_crypto_function(int type, va_list valist)
 									output_size,
 									p_output_length);
 			break;
+#ifdef CRYPTO_1_0
 		case PAL_CRYPTO_AEAD_ENCRYPT_SETUP:
 			aead_operation           = va_arg(valist, psa_aead_operation_t *);
 			key                      = va_arg(valist, psa_key_id_t);
@@ -219,6 +226,7 @@ int32_t pal_crypto_function(int type, va_list valist)
 								   p_output_length,
 								   input,
 								   input_length);
+#endif
 			break;
 		case PAL_CRYPTO_ASYMMETRIC_DECRYPT:
 			key                      = va_arg(valist, psa_key_id_t);
