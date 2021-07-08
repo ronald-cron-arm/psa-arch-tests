@@ -65,7 +65,7 @@ static const test_data check1[] = {
     .data_length     = 64,
     .usage_flags     = PSA_KEY_USAGE_SIGN_HASH,
     .alg             = PSA_ALG_CMAC,
-    .expected_status = PSA_ERROR_NOT_SUPPORTED,
+    .expected_status = PSA_ERROR_INVALID_ARGUMENT,
 },
 #endif
 #endif
