@@ -28,7 +28,6 @@ typedef struct {
 } test_data;
 
 static const test_data check1[] = {
-#ifdef CRYPTO_1_0
 #ifdef ARCH_TEST_HMAC
 #ifdef ARCH_TEST_SHA256
 {
@@ -143,7 +142,6 @@ static const test_data check1[] = {
     .data_length     = AES_16B_KEY_SIZE,
     .expected_status = PSA_ERROR_INVALID_ARGUMENT
 },
-#endif
 #endif
 #endif
 };

@@ -28,7 +28,6 @@ typedef struct {
 } test_data;
 
 static const test_data check1[] = {
-#ifdef CRYPTO_1_0
 #ifdef ARCH_TEST_HMAC
 #ifdef ARCH_TEST_SHA256
 {
@@ -144,6 +143,4 @@ static const test_data check1[] = {
 },
 #endif
 #endif
-#endif
-
 };

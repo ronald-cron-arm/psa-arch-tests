@@ -649,7 +649,6 @@ int32_t pal_crypto_function(int type, va_list valist)
 			mac_operation            = va_arg(valist, psa_mac_operation_t *);
 			return psa_mac_abort(mac_operation);
 			break;
-#ifdef CRYPTO_1_0
 		case PAL_CRYPTO_MAC_COMPUTE:
 			key                      = va_arg(valist, psa_key_id_t);
 			alg                      = va_arg(valist, psa_algorithm_t);
@@ -666,7 +665,6 @@ int32_t pal_crypto_function(int type, va_list valist)
 								   output_size,
 								   p_output_length);
 			break;
-#endif
 		case PAL_CRYPTO_MAC_OPERATION_INIT:
 			mac_operation            = va_arg(valist, psa_mac_operation_t *);
 			mac_operation_temp       = psa_mac_operation_init();
