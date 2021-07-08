@@ -147,6 +147,7 @@ static const test_data check1[] = {
 #endif
 #endif
 
+#if 0 // Disable as cmac_aes_128 is not defined in ./common/test_crypto_common.c
 #ifdef ARCH_TEST_AES_128
 #ifdef ARCH_TEST_CMAC
 {
@@ -165,6 +166,7 @@ static const test_data check1[] = {
     .operation_state     = 1,
     .expected_status     = PSA_SUCCESS
 },
+#endif
 #endif
 #endif
 };
